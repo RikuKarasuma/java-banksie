@@ -2,11 +2,8 @@ package xyz.company.bank.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.company.bank.service.AccountService;
+import xyz.company.bank.service.*;
 import xyz.company.bank.Command;
-import xyz.company.bank.service.CommandService;
-import xyz.company.bank.service.ExecutionService;
-import xyz.company.bank.service.UserInputService;
 
 import java.math.BigDecimal;
 
@@ -22,7 +19,9 @@ import static xyz.company.bank.service.util.ServiceUtil.COMMAND_DELIMITER;
  */
 @Service
 public class ExecutionServiceImpl implements ExecutionService {
-
+    
+    @Autowired
+    private PrintOutService printOutService;
     @Autowired
     private UserInputService userInputService;
     @Autowired
@@ -33,7 +32,7 @@ public class ExecutionServiceImpl implements ExecutionService {
     @Override
     public void initAndRead(boolean continueUntilQuit) {
         do {
-            System.out.println("Enter command (O, C, T, B, L, Q)");
+            printOutService.printOut("Enter command (O, C, T, B, L, Q)");
             final var userInput = userInputService.read();
             final Command userCommand = commandService.validateCommand(userInput);
 
@@ -55,14 +54,14 @@ public class ExecutionServiceImpl implements ExecutionService {
 
     @Override
     public void executeOpenAccount(final String userInput) {
-        System.out.println("Opening account...");
+        printOutService.printOut("Opening account...");
         final var accountNumber = Integer.parseInt(userInput.split(COMMAND_DELIMITER)[1]);
         accountService.openAccount(accountNumber);
     }
 
     @Override
     public void executeTransfer(final String userInput) {
-        System.out.println("Executing account transfer...");
+        printOutService.printOut("Executing account transfer...");
         final var sourceAccountNumber = Integer.parseInt(userInput.split(COMMAND_DELIMITER)[1]);
         final var destinationAccountNumber = Integer.parseInt(userInput.split(COMMAND_DELIMITER)[2]);
         final var transferAmount = new BigDecimal(userInput.split(COMMAND_DELIMITER)[3]);
@@ -71,27 +70,27 @@ public class ExecutionServiceImpl implements ExecutionService {
 
     @Override
     public void executeBalance(final String userInput) {
-        System.out.println("Checking account balance...");
+        printOutService.printOut("Checking account balance...");
         final var accountNumber = Integer.parseInt(userInput.split(COMMAND_DELIMITER)[1]);
         accountService.balance(accountNumber);
     }
 
     @Override
     public void executeCloseAccount(final String userInput) {
-        System.out.println("Closing account...");
+        printOutService.printOut("Closing account...");
         final var accountNumber = Integer.parseInt(userInput.split(COMMAND_DELIMITER)[1]);
         accountService.closeAccount(accountNumber);
     }
 
     @Override
     public void executeListAccounts() {
-        System.out.println("Listing accounts...");
+        printOutService.printOut("Listing accounts...");
         accountService.list();
     }
 
     @Override
     public void executeExit() {
-        System.out.println("Shutting down, bye");
+        printOutService.printOut("Shutting down, bye");
         System.exit(0);
     }
 }

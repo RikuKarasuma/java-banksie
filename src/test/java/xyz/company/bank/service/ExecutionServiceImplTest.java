@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import xyz.company.bank.service.impl.CommandServiceImpl;
 import xyz.company.bank.service.impl.ExecutionServiceImpl;
+import xyz.company.bank.service.impl.PrintOutServiceImpl;
 
 import java.math.BigDecimal;
 
@@ -41,6 +42,11 @@ public class ExecutionServiceImplTest {
         @Bean
         public AccountService accountServiceMock() {
             return Mockito.mock(AccountService.class);
+        }
+        
+        @Bean
+        public PrintOutService printOutServiceImpl() {
+            return new PrintOutServiceImpl();
         }
     }
 

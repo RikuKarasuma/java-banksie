@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import xyz.company.bank.Command;
 import xyz.company.bank.service.impl.CommandServiceImpl;
+import xyz.company.bank.service.impl.PrintOutServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -29,6 +30,11 @@ public class CommandServiceImplTest {
         @Bean
         public UserInputService userInputServiceMock() {
             return Mockito.mock(UserInputService.class);
+        }
+
+        @Bean
+        public PrintOutService printOutServiceImpl() {
+            return new PrintOutServiceImpl();
         }
     }
 

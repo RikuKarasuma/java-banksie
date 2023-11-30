@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.company.bank.Command;
 import xyz.company.bank.service.CommandService;
+import xyz.company.bank.service.PrintOutService;
 import xyz.company.bank.service.UserInputService;
 
 import java.util.Objects;
@@ -19,6 +20,8 @@ import static xyz.company.bank.service.util.ServiceUtil.*;
 @Service
 public class CommandServiceImpl implements CommandService {
 
+    @Autowired
+    private PrintOutService printOutService;
     @Autowired
     private UserInputService userInputService;
 
@@ -56,7 +59,7 @@ public class CommandServiceImpl implements CommandService {
                     return Command.QUIT;
             }
             default -> {
-                System.out.println("Command not recognized");
+                printOutService.printOut("Command not recognized");
                 return Command.INVALID;
             }
         }
@@ -96,7 +99,7 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public boolean validateExitCommand(final String[] commandPlusArgs) {
-        System.out.println("Are you sure you wish to exit? (Y/N)");
+        printOutService.printOut("Are you sure you wish to exit? (Y/N)");
         final var areYouSure = this.userInputService.read();
         return "Y".equals(areYouSure);
     }
