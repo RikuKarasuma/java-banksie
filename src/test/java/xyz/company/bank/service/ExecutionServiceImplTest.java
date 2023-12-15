@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 @SpringJUnitConfig(ExecutionServiceImplTest.Config.class)
 public class ExecutionServiceImplTest {
 

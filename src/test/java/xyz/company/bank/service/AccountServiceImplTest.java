@@ -15,8 +15,6 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
-@ExtendWith(MockitoExtension.class)
 @SpringJUnitConfig(AccountServiceImplTest.Config.class)
 public class AccountServiceImplTest {
 

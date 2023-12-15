@@ -15,7 +15,6 @@ import xyz.company.bank.service.impl.PrintOutServiceImpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 @SpringJUnitConfig(CommandServiceImplTest.Config.class)
 public class CommandServiceImplTest {
 
